@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  web:
+    image: yourdockerhub/devops-demo:latest
+    ports:
+      - "80:3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
